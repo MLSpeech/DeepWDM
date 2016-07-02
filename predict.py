@@ -16,7 +16,7 @@ def predict(input_path, output_path, model):
     tmp_duration = 'tmp.dur'
 
     if not os.path.exists(input_path):
-        print >> sys.stderr, "wav file does not exits"
+        print >> sys.stderr, "%s file does not exits" % input_path
         return
 
     t_model = model.upper()    
