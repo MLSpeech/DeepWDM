@@ -16,7 +16,6 @@ cmd:text('Options:')
 cmd:option('-seed', 1, 'fixed input seed for repeatable experiments')
 cmd:option('-threads', 2, 'number of threads')
 -- data:
-cmd:option('-folder_path', '/Users/yossiadi/Projects/wdm_lstm/torch/tmp/', 'the path to the data files')
 cmd:option('-x_filename', 'tmp.features', 'the path to the featues')
 cmd:option('-input_dim', 39, 'the input size')
 cmd:option('-class_path', 'measurement/cls.txt', 'the path for the output file, hard classification')
@@ -45,7 +44,7 @@ print '==> Measuring word duration'
 dofile 'utils.lua'
 
 print '==> loading data'
-data_x = load_data(paths.concat(opt.folder_path, opt.x_filename), opt.input_dim)
+data_x = load_data(opt.x_filename, opt.input_dim)
 outputs = torch.zeros(data_x:size(1))
 prbs = torch.zeros(data_x:size(1))
 softmax = nn.Sequencer(nn.SoftMax())

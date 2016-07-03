@@ -7,7 +7,7 @@ from lib.textgrid import *
 __author__ = 'yossiadi'
 
 
-def create_text_grid(label_path, output_text_grid, length, start_extract):
+def create_text_grid(label_path, wav_filename, output_textgrid_filename, length, start_extract, csv_filename):
     # defines
     msc_2_sec = 0.001
 
@@ -36,7 +36,16 @@ def create_text_grid(label_path, output_text_grid, length, start_extract):
         vot_tier.append(Interval((float(offset) * msc_2_sec + start_extract) * 10, float(length), ""))
 
         text_grid.append(vot_tier)
-        text_grid.write(output_text_grid)
+        text_grid.write(output_textgrid_filename)
+
+    if csv_filename:
+        with open(csv_filename, 'w') as f:
+            f.write("FILE, DURATION, START_TIME, END_TIME\n")
+            f.write("%s, %f, %f, %f\n" % (wav_filename, 1000.0 * (
+                                              (float(offset) * msc_2_sec + start_extract) * 10 -
+                                              (float(onset) * msc_2_sec + start_extract) * 10),
+                                          (float(onset) * msc_2_sec + start_extract) * 10,
+                                          (float(offset) * msc_2_sec + start_extract) * 10))
 
 
 if __name__ == "__main__":
@@ -48,7 +57,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("label_filename", help="The label file")
     parser.add_argument("wav_filename", help="The wav file")
-    parser.add_argument("output_text_grid", help="The output TextGrid file")
+    parser.add_argument("output_textgrid", help="The output TextGrid file")
     args = parser.parse_args()
 
     # main function
