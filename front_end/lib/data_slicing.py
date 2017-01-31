@@ -1,6 +1,6 @@
 import cPickle
 import os
-from lib.htkmfc import HTKFeat_read
+from htkmfc import HTKFeat_read
 import numpy as np
 
 __author__ = 'yossiadi'

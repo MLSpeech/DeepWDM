@@ -33,7 +33,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="This script extract the mfcc features from a given audio file.")
     parser.add_argument("wav_path", help="The path to the audio files")
     parser.add_argument("features_path", help="The path to save the mfcc's and labels, the saved file will be a "
-                                         "pickle file for both features and labels")
+                                              "pickle file for both features and labels")
     args = parser.parse_args()
 
     main(args.wav_path, args.features_path)

@@ -1,9 +1,8 @@
-__author__ = 'Yossi'
-
 import os
 from optparse import OptionParser
+from textgrid import *
 
-from lib.textgrid import *
+__author__ = 'Yossi'
 
 # this script shorten the wav file and its TextGrid
 # it's shorten the file according to the vowel onset and offset

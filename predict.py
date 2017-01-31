@@ -1,12 +1,12 @@
 
 import argparse
-import sys
 from label2textgrid import create_text_grid
 from lib import utils
 from post_process import post_process
 from lib.utils import *
 import front_end.predict_single_file as fe
 import os
+
 
 def predict(input_path, output_path, model, csv_filename):
 
@@ -40,8 +40,9 @@ def predict(input_path, output_path, model, csv_filename):
     dur_file = generate_tmp_filename('dur')
 
     print '\n1) Extracting features and classifying ...'
+    abs_path = os.path.abspath(input_path)
     os.chdir("front_end/")
-    fe.main(os.path.abspath(os.path.abspath(input_path)), feature_file)
+    fe.main(abs_path, feature_file)
     os.chdir("..")
 
     print '\n2) Model predictions ...'

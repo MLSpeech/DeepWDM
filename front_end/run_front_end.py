@@ -3,8 +3,7 @@ import shutil
 import sys
 import os
 import numpy as np
-
-from lib import utility as utils
+from lib import utils as utils
 from lib import textgrid as tg
 from lib.htkmfc import HTKFeat_read
 
@@ -37,7 +36,7 @@ def extract_single_mfcc(in_path, out_path):
         sox_path = 'sbin/osx/sox'
         htk_path = 'sbin/osx'
 
-    tmp_file = "tmp.wav"
+    tmp_file = utils.generate_tmp_filename('wav')
     cmd = "%s %s -r 16000 -b 16 %s" % (sox_path, in_path, tmp_file)
     utils.easy_call(cmd)
     cmd = "%s/HCopy -C config/htk.config %s %s" % (htk_path, tmp_file, out_path)
@@ -63,9 +62,9 @@ def extract_single_acoustic(in_path, out_path):
 
     # write the data
     input_file.write(
-            '"' + in_path + '" ' + str('%.8f' % 0) + ' ' + str(float(length) - zero) + ' ' + str(
-                '%.8f' % 0) + ' ' + str(
-                    '%.8f' % 0))
+        '"' + in_path + '" ' + str('%.8f' % 0) + ' ' + str(float(length) - zero) + ' ' + str(
+            '%.8f' % 0) + ' ' + str(
+            '%.8f' % 0))
     features_file.write(out_path)
 
     input_file.close()
