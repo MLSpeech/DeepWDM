@@ -28,7 +28,11 @@ def predict(input_path, output_path, model, csv_filename):
         model_path = 'results/1_layer_model.net'
         print '==> unknown model, using default model: single RNN'
 
-    length = utils.get_wav_file_length(input_path)
+    try:
+        length = utils.get_wav_file_length(input_path)
+    except:
+        print "The input file ", input_path, " is probably not a valid WAV file."
+        exit(-1)
 
     feature_file = generate_tmp_filename('features')
     prob_file = generate_tmp_filename('prob')
